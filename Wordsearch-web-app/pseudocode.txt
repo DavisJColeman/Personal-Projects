@@ -1,0 +1,77 @@
+Algorithm: Calculate Word Positions
+
+Input:
+  - words: Array of words to be placed on the word search grid
+  - gameIndex: 2D array representing the gameboard
+
+Output:
+  - wordPositions: Array of objects containing word positions (word, row, column, direction, length)
+
+Function calculateWordPositions(words, gameIndex):
+    wordPositions = []
+
+    for each word in words:
+        attempts = 0
+        successCount = 0
+        tempGameIndex = copy of gameIndex (for temporary calculations)
+
+        while successCount < length(words) and attempts < maxAttempts:
+            randomStartRow, randomStartCol, randomDirection = generateRandomStart()
+
+            if successCount is 0:
+                // For the first word, check if it fits and add to wordPositions
+                if wordFitsOnBoard(word, randomStartRow, randomStartCol, randomDirection):
+                    addWordPosition(wordPositions, word, randomStartRow, randomStartCol, randomDirection)
+                    updateTempGameIndex(tempGameIndex, word, randomStartRow, randomStartCol, randomDirection)
+                    successCount += 1
+
+            else:
+                // For subsequent words, check if they fit without conflicts
+                if wordsDoNotConflict(word, wordPositions, randomStartRow, randomStartCol, randomDirection, tempGameIndex):
+                    addWordPosition(wordPositions, word, randomStartRow, randomStartCol, randomDirection)
+                    updateTempGameIndex(tempGameIndex, word, randomStartRow, randomStartCol, randomDirection)
+                    successCount += 1
+
+            attempts += 1
+
+    if successCount < length(words):
+        logError("Unable to calculate word positions")
+
+    return wordPositions
+
+Function generateRandomStart():
+    // Generate random start row, column, and direction
+    randomStartRow = getRandomNum(18)
+    randomStartCol = getRandomNum(18)
+    randomDirection = getRandomDirection()
+    return randomStartRow, randomStartCol, randomDirection
+
+Function wordFitsOnBoard(word, row, col, direction):
+    // Check if the word fits on the board in the specified direction
+    // Return true if it fits, false otherwise
+
+Function wordsDoNotConflict(word, wordPositions, row, col, direction, tempGameIndex):
+    // Check if the word conflicts with previously placed words on the board
+    // Return true if it does not conflict, false otherwise
+
+Function addWordPosition(wordPositions, word, row, col, direction):
+    // Add word position to the wordPositions array
+    wordPositions.push({
+        word: word,
+        row: row,
+        column: col,
+        direction: direction,
+        length: length(word)
+    })
+
+Function updateTempGameIndex(tempGameIndex, word, row, col, direction):
+    // Update the temporary game index with the newly placed word
+    // This is used for checking conflicts before finalizing the word positions
+
+Function getRandomNum(upperBound):
+    // Generate a random number between 0 and upperBound - 1
+    // Return the random number
+
+Function getRandomDirection():
+    // Get a random direction from the available list of directions
+    // Return the random direction
