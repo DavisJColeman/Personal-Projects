@@ -1,5 +1,3 @@
-import math
-
 def sum_of_multiples_of_3_or_5():
     counter = 0
     sum = 0
