@@ -334,10 +334,10 @@ function insertWord(word, direction, startRow, startCol, gameIndex, isFinal) { /
                 break;
         }
         if (isFinal) {
-            //cell[0] = 'lightgreen';
+            cell[0] = 'lightgreen';
             cell[1] = wordArray[i];
             cell[2].textContent = wordArray[i];
-            //cell[2].style.backgroundColor = 'lightgreen';
+            cell[2].style.backgroundColor = 'lightgreen';
         } else {
             cell[0] = wordArray[i];
             cell[1] = rowCount;
