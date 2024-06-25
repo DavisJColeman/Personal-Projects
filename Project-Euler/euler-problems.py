@@ -84,35 +84,6 @@ def sum_square_difference():
     squareOfSums = (sum(range(1, 101))) ** 2
     return squareOfSums - sumOfSquares
 
-'''
-def number_is_prime(num, primes):
-    upperLimit = math.ceil(num ** 0.5)
-    for divisor in primes:
-        if divisor > upperLimit or divisor == 0:
-            break
-        if num % divisor == 0:
-            return False
-    return True
-
-def ten_thousand_and_first_prime():
-    listOfPrimes = [0]*10001 # initialize an array of size 10001
-    listOfPrimes[0] = 2
-    listOfPrimes[1] = 3
-    listOfPrimes[2] = 5
-    listOfPrimes[3] = 7
-    listOfPrimes[4] = 11
-    listOfPrimes[5] = 13
-    for i in range(0, 10001):
-        if i > 5:
-            currentPrime = listOfPrimes[i - 1] + 2
-            isPrime = number_is_prime(currentPrime, listOfPrimes)
-            while not isPrime:
-                currentPrime + 2
-                isPrime = number_is_prime(currentPrime, listOfPrimes)
-            listOfPrimes[i] = currentPrime
-    return listOfPrimes[-1]
-'''
-
 """NOT MY SOLUTION"""
 def primes(n): # function which computes the nth prime number given input number n
     primes = [2] # initialize list tracking all primes up to and including the nth prime number
@@ -144,28 +115,74 @@ def largest_product_in_series(number, adjacentDigitsCount):
             productDigits = curDigits
     return product, productDigits
 
-def main():
-    '''
-    firstAnswer = sum_of_multiples_of_3_or_5()
-    secondAnswer = sum_of_even_fibonacci_numbers()
-    thirdAnswer = int(get_largest_prime_factor(600851475143))
-    fourthAnswer = largest_palindrome_product()
-    fifthAnswer = smallest_multiple()
-    sixthAnswer = sum_square_difference()
-    seventhAnswer = primes(10001)
-    eighthAnswer = print(largest_product_in_series(7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450, 13))
-    ninthAnswer = 
-    print("1. " + str(firstAnswer)   + ",\n" + 
-          "2. " + str(secondAnswer)  + ",\n" + 
-          "3. " + str(thirdAnswer)   + ",\n" + 
-          "4. " + str(fourthAnswer)  + ",\n" +
-          "5. " + str(fifthAnswer)   + ",\n" +
-          "6. " + str(sixthAnswer)   + ",\n" +
-          "7. " + str(seventhAnswer) + ",\n" +
-          "8. " + str(eighthAnswer)  + ",\n" +
-          "9. " + str(ninthAnswer))
-    '''
+'''
+A Pythagorean triplet is a set of three natural numbers, 
+A < B < C, for which A^2 + B^2 = C^2.
 
+For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2
+
+There exists exactly one Pythagorean triplet for which 
+A + B + C = 1000.
+
+Find the product A*B*C.
+
+HELP/NOTES
+Euclid's Formula: 
+- For natural numbers A, B, C where A < B < C, and A^2 + B^2 = C^2
+- for integers m and n where m > n > 0,
+- A = m^2 - n^2
+- B = 2mn
+- C = m^2 + n^2
+
+m^2 - n^2 + 2mn + m^2 + n^2 = 1000
+2(m^2) + 2mn = 1000
+m^2 + mn = 500
+m(m + n) = 500
+
+If X = m, and Y = m + n,
+X(Y) = 500
+
+Compute all of the factors of 500. In the form (X, Y) they are:
+(1, 500), (2, 250), (4, 125), (5, 100), (10, 50), (20, 25)
+
+m = 1, m + n = 500, n = 499, m < n  WRONG does not obey (m > n > 0)
+m = 2, m + n = 250, n = 245, m < n  WRONG does not obey (m > n > 0)
+m = 4, m + n = 125, n = 121, m < n  WRONG does not obey (m > n > 0)
+m = 5, m + n = 100, n = 95,  m < n  WRONG does not obey (m > n > 0)
+m = 10, m + n = 50, n = 40,  m < n  WRONG does not obey (m > n > 0)
+m = 20, m + n = 25, n = 5,   m > n  CORRECT does obey (m > n > 0)
+
+A = m^2 - n^2 = 20^2 - 5^2 = 400 - 25 = 375
+B = 2mn = 2(20)(5) = 200
+C = m^2 + n^2 = 20^2 + 5^2 = 400 + 25 = 425
+
+375 + 200 + 425 = 1000  CORRECT does obey (A + B + C = 1000)
+
+375^2 = 140625, 200^2 = 40000, 425^2 = 180625
+
+140625 + 40000 = 180625  CORRECT does obey (A^2 + B^2 = C^2)
+
+Product ABC = 375(200)(425) = 3187500
+'''
+def special_pythagorean_triplet():
+    A, B, C = 332, 333, 335
+    
+    while not ((A < B < C) and (A^2 + B^2 == C^2) and (A + B + C == 1000)):
+        if (A + B + C > 1000): 
+
+    return (A, B, C, A*B*C)
+        
+
+def main():
+    #print("1. " + sum_of_multiples_of_3_or_5())
+    #print("2. " + sum_of_even_fibonacci_numbers())
+    #print("3. " + int(get_largest_prime_factor(600851475143)))
+    #print("4. " + largest_palindrome_product())
+    #print("5. " + smallest_multiple())
+    #print("6. " + sum_square_difference())
+    #print("7. " + primes(10001))
+    #print("8. " + largest_product_in_series(7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450, 13))
+    print("9. " + str(special_pythagorean_triplet()))
 
 if __name__ == "__main__":
     main()
